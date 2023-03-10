@@ -31,7 +31,7 @@ const totalVerdict = (car: {
 
     return +item[1] + acc;
   }, 0);
-  const verdict = sumRating / car.rating.length;
+  const verdict: number = sumRating / car.rating.length;
   return verdict;
 };
 
