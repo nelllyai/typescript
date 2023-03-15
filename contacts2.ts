@@ -1,5 +1,5 @@
 {
-  type User = {
+  interface User {
     type: 'user',
     name: string,
     age: number,
@@ -7,7 +7,7 @@
   };
 
 
-  type Admin = {
+  interface Admin {
     type: 'admin',
     name: string;
     age: number;
@@ -61,9 +61,30 @@
     }
   ];
 
-  const logPerson = (user: User | Admin) => {
-    console.log(`${user.name}, ${user.age}`);
-  };
+  const isAdmin = (person: Person): person is Admin => {
+    return person.type === 'admin';
+  }
 
-  persons.forEach(logPerson);
+  const isUser = (person: Person): person is User => {
+    return person.type === 'user';
+  }
+
+  const logPerson = (person: Person) => {
+    let information: string = '';
+    if (isAdmin(person)) {
+      information = person.role;
+    }
+    if (isUser(person)) {
+      information = person.group;
+    }
+    console.log(` - ${person.name}, ${person.age}, ${information}`);
+  }
+
+  console.log('Admins:');
+  persons.filter(isAdmin).forEach(logPerson);
+
+  console.log();
+
+  console.log('Users:');
+  persons.filter(isUser).forEach(logPerson);
 }
