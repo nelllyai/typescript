@@ -69,6 +69,26 @@
     return person.type === 'user';
   }
 
+  const filterAdmins = (persons: Person[]): Admin[] => {
+    const adminList: Admin[] = [];
+    
+    persons.forEach(person => {
+      if (isAdmin(person)) adminList.push(person);
+    })
+
+    return adminList;
+  }
+
+  const filterUsers = (persons: Person[]): User[] => {
+    const userList: User[] = [];
+    
+    persons.forEach(person => {
+      if (isUser(person)) userList.push(person);
+    })
+
+    return userList;
+  }
+
   const logPerson = (person: Person) => {
     let information: string = '';
     if (isAdmin(person)) {
@@ -81,10 +101,10 @@
   }
 
   console.log('Admins:');
-  persons.filter(isAdmin).forEach(logPerson);
+  filterAdmins(persons).forEach(logPerson);
 
   console.log();
 
   console.log('Users:');
-  persons.filter(isUser).forEach(logPerson);
+  filterUsers(persons).forEach(logPerson);
 }
