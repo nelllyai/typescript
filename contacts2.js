@@ -51,21 +51,13 @@
     const isUser = (person) => {
         return person.type === 'user';
     };
-    const filterAdmins = (persons) => {
-        const adminList = [];
+    const filterPersons = (persons, filter) => {
+        const personsList = [];
         persons.forEach(person => {
-            if (isAdmin(person))
-                adminList.push(person);
+            if (filter(person))
+                personsList.push(person);
         });
-        return adminList;
-    };
-    const filterUsers = (persons) => {
-        const userList = [];
-        persons.forEach(person => {
-            if (isUser(person))
-                userList.push(person);
-        });
-        return userList;
+        return personsList;
     };
     const logPerson = (person) => {
         let information = '';
@@ -78,8 +70,8 @@
         console.log(` - ${person.name}, ${person.age}, ${information}`);
     };
     console.log('Admins:');
-    filterAdmins(persons).forEach(logPerson);
+    filterPersons(persons, isAdmin).forEach(logPerson);
     console.log();
     console.log('Users:');
-    filterUsers(persons).forEach(logPerson);
+    filterPersons(persons, isUser).forEach(logPerson);
 }
