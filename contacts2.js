@@ -59,6 +59,14 @@
         });
         return adminList;
     };
+    const filterUsers = (persons) => {
+        const userList = [];
+        persons.forEach(person => {
+            if (isUser(person))
+                userList.push(person);
+        });
+        return userList;
+    };
     const logPerson = (person) => {
         let information = '';
         if (isAdmin(person)) {
@@ -73,5 +81,5 @@
     filterAdmins(persons).forEach(logPerson);
     console.log();
     console.log('Users:');
-    persons.filter(isUser).forEach(logPerson);
+    filterUsers(persons).forEach(logPerson);
 }
