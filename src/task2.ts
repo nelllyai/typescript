@@ -1,56 +1,21 @@
-class Product {
-  private _title: string;
-  private _cost: number;
+import { Product } from "./modules/Product";
+import { AbstractSelling } from "./modules/AbstractSelling";
+import { FixedSaleSelling } from "./modules/FixedSaleSelling";
+import { CountSaleSelling } from "./modules/CountSaleSelling";
 
-  constructor(title: string, cost: number) {
-    this._title = title;
-    this._cost = cost;
-  }
+const sellings: AbstractSelling[] = [
+  new FixedSaleSelling(new Product('толстовка', 42), 1),
+  new FixedSaleSelling(new Product('кроссовки', 33), 2),
+  new FixedSaleSelling(new Product('лампа', 15.6), 3),
+  new FixedSaleSelling(new Product('ноутбук', 520), 1),
 
-  public get title(): string {
-    return this._title;
-  }
+  new CountSaleSelling(new Product('чипсы', 1.8), 12, 6),
+  new CountSaleSelling(new Product('ложка', 1), 10, 15),
+  new CountSaleSelling(new Product('книга', 3.2), 5, 5),
+  new CountSaleSelling(new Product('свечка', 2), 8, 5),
+];
 
-  public get cost(): number {
-    return this._cost;
-  }
+sellings.forEach(selling => console.log(selling, 'Итого:', selling.getPrice()));
 
-  public set title(title: string) {
-    this._title = title;
-  }
-
-  public set cost(cost: number) {
-    this._cost = cost;
-  }
-}
-
-abstract class AbstractSelling {
-  private _product: Product;
-  private _count: number;
-
-  constructor(product: Product, count: number) {
-    this._product = product;
-    this._count = count;
-  }
-
-  public get product(): Product {
-    return this._product;
-  }
-
-  public get count(): number {
-    return this._count;
-  }
-
-  public set product(product: Product) {
-    this._product = product;
-  }
-
-  public set count(count: number) {
-    this._count = count;
-  }
-
-  public abstract getPrice(): number;
-  public abstract compare(product: Product): void;
-}
-
-
+console.log('\nОтсортировали массив по убыванию стоимости покупки:\n');
+sellings.sort(AbstractSelling.compare).forEach(selling => console.log(selling, 'Итого:', selling.getPrice()));
