@@ -44,6 +44,8 @@ students.add({
     year: 4,
     speciality: 'лингвист'
 });
+console.log('Список студентов по возрастанию id:');
+console.log(students.sorted());
 console.log('Вывод студента с id 235:');
 console.log(students.get(235));
 console.log('Удаление студента с id 235...');
@@ -68,6 +70,8 @@ employees.add({
     post: 'флорист'
 });
 console.log();
+console.log('Список работников по убыванию id:');
+console.log(employees.sorted('down'));
 console.log('Вывод работника с id 675:');
 console.log(employees.get(675));
 console.log('Удаление работника с id 675...');
